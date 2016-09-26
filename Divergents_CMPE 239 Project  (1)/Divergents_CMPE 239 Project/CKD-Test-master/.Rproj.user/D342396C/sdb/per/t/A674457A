@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "set.seed(0305)\nindex <- createDataPartition(ModelDataFactored$CKD, p = 0.75, list = FALSE)\ntraining <- ModelDataFactored[index,]\ntesting <- ModelDataFactored[-index,]\n\n\nnb <- naiveBayes(CKD~., data=training,laplace=1)\n\nnb\n\npredVector<-predict(nb, newdata=testing)\nconfusionMatrix(predVector, testing$CKD, positive=\"No\")\n\nprint(\"Naive Bayes results:\")\nprint(\"Accuracy: 86%\")\nprint(\"Sensitivity: 87%\")\nprint(\"Specificity: 62%\")\n\nTestDataNB <- TestDataFactored\nTestDataNB$CKD <- predict(nb, newdata=TestDataNB)\n\nwrite.csv(TestDataNB, file = \"NaiveBayes.csv\", row.names = F, quote = F)\nw1<-read.csv(file=\"NaiveBayes.csv\",head=TRUE)\nmatplot(w1[, 1], w1[, -1], type=\"h\",xlab=\"all attributes\",ylab=\"CKD\",main=\"distribution of Naive bayes set\")\nTestDataNB <- NULL\n\n",
+    "created" : 1462309707383.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1078875285",
+    "id" : "A674457A",
+    "lastKnownWriteTime" : 1462269609,
+    "last_content_update" : 1462269609,
+    "path" : "~/Desktop/mahitha/CKD-Test-master/NaiveBayes.R",
+    "project_path" : "NaiveBayes.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

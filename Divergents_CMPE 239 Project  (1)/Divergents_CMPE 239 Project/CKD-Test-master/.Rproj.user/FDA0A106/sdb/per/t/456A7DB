@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(shiny)\nset.seed(0402)\n\n# Define server logic required to draw a histogram\n\n\n\n  shinyServer(function(input,output,session)\n    {\n      output$myPlot<-renderPlot({\n        gen<-input$gender\n        ag<-input$age\n        if(gen=='female'){\n          ModelDataNum <- as.data.frame(sapply(ModelDataFactored, as.numeric))\n          \n          index <- createDataPartition(ModelDataFactored$CKD, p = 0.75, list = FALSE)\n          training <- ModelDataNum[index,]\n          testing <- ModelDataNum[-index,]\n          \n          n <- names(training)\n          names <- paste(n[1:32], collapse = ' + ')\n          f <- paste(\"CKD ~ \", names)\n          randomVec <- neuralnet(f, training, hidden = c(5,4), threshold = 0.03, stepmax = 5e+07, learningrate = 0.05, lifesign = \"full\")\n        }\n        else\n        {\n          randomVec<-neuralnet(f, training, hidden = c(5,4), threshold = 0.03, stepmax = 5e+07, learningrate = 0.05, lifesign = \"full\")\n        }\n        \n        hist(randomVec,col=\"blue\")\n        \n      })\n      \n    }\n)",
+    "created" : 1462227745388.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "584248902",
+    "id" : "456A7DB",
+    "lastKnownWriteTime" : 1462227049,
+    "last_content_update" : 1462227049,
+    "path" : "C:/Users/mahitha/Desktop/239/project/ckd/CKD-Test-master/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

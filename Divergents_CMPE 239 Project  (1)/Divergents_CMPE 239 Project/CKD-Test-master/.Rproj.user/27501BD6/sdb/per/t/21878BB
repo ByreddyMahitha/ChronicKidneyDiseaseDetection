@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "set.seed(0305)\n\nModelDataNum <- as.data.frame(sapply(ModelDataFactored, as.numeric))\n\nindex <- createDataPartition(ModelDataFactored$CKD, p = 0.75, list = FALSE)\ntraining <- ModelDataNum[index,]\ntesting <- ModelDataNum[-index,]\n\nn <- names(training)\nnames <- paste(n[1:32], collapse = ' + ')\nf <- paste(\"CKD ~ \", names)\nnn <- neuralnet(f, training, hidden = 2, threshold = 0.03, stepmax = 5e+07, learningrate = 0.05, lifesign = \"full\")\nplot(nn)\nnn.results <- compute(nn, testing[-33])\n\npredVector <- (nn.results$net.result < 1.5)\ntable <- table(Predicted = (predVector), Actual = (testing$CKD == 1))\ntable\n\nprint(\"Neural Network results:\")\nprint(\"Sensitivity: 100%\")\nprint(\"Specificity: 0%\")\n\nTestDataNN <- TestDataFactored\nTestDataNN <- as.data.frame(sapply(TestDataNN, as.numeric))\nnn.predNew <- compute(nn, TestDataNN)\nTestDataNN <- round(nn.predNew$net.result)\n\nwrite.csv(TestDataNN, file = \"NeuralNet.csv\", row.names = F, quote = F)\n\nTestDataNN <- NULL\ntesting <- NULL\ntraining <- NULL\n\n",
+    "created" : 1462259293854.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4219476455",
+    "id" : "21878BB",
+    "lastKnownWriteTime" : 1462259533,
+    "last_content_update" : 1462259533861,
+    "path" : "~/Desktop/CKD-Test-master/NeuralNet.R",
+    "project_path" : "NeuralNet.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

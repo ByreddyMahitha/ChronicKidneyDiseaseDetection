@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\ninstall.packages(\"caret\")\ninstall.packages(\"caTools\")\ninstall.packages(\"ROCR\")\ninstall.packages(\"class\")\ninstall.packages(\"MASS\")\ninstall.packages(\"e1071\")\ninstall.packages(\"rpart\")\ninstall.packages(\"rpart.plot\")\n\ninstall.packages(\"party\")\ninstall.packages(\"kernlab\")\ninstall.packages(\"neuralnet\")\n\n\n\n\n\nlibrary(caret)\nlibrary(caTools)\nlibrary(ROCR)\nlibrary(class)\nlibrary(MASS)\nlibrary(e1071)\nlibrary(rpart)\nlibrary(rpart.plot)\n\n\nlibrary(party)\nlibrary(kernlab)\nlibrary(neuralnet)\n\n\nModelData <- read.csv(\"CKD Screening Data for Model Building.csv\")\nTestData <- read.csv(\"CKD Screening Data for Testing.csv\")\n\nModelData$ID <- NULL\nTestData$ID <- NULL\n\nModelData$X <- NULL\nTestData$X <- NULL\n\nModelData<-ModelData[-5934,] #Bad row. VERY bad row\n\nModelData <- na.omit(ModelData)\nTestData <- na.omit(TestData)\n\nModelData$Racegrp <- droplevels(ModelData$Racegrp)\nModelData$CareSource <- droplevels(ModelData$CareSource)\n\nTestData$Racegrp <- droplevels(TestData$Racegrp)\nTestData$CareSource <- droplevels(TestData$CareSource)\n\nlevels(ModelData$Racegrp) <- levels(TestData$Racegrp)\nlevels(TestData$CareSource) <- levels(ModelData$CareSource)\n\n\n#Keep separate copy of datasets, start factorizing variables in new copies\nModelDataFactored <- ModelData\nTestDataFactored <- TestData\n\nsource(\"Model-Factorize.R\")\nsource(\"Test-Factorize.R\")\n\n\n\n\nsource(\"SVM.R\")\n\n\nsource(\"NaiveBayes.R\")\n\n\nsource(\"NeuralNet.R\")",
+    "created" : 1462313740353.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4286274906",
+    "id" : "F8BC18EA",
+    "lastKnownWriteTime" : 1462303664,
+    "last_content_update" : 1462303664,
+    "path" : "~/Desktop/mahitha/CKD-Test-master/CKD-Test.R",
+    "project_path" : "CKD-Test.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

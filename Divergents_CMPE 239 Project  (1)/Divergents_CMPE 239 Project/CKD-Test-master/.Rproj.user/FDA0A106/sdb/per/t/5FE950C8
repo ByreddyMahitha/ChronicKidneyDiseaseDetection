@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(shiny)\n\n# Define UI for application that draws a histogram\nshinyUI(\n  \n  pageWithSidebar(\n    headerPanel(\"CKD Prediction\"),\n    sidebarPanel(\n      selectInput(\"gender\",\"please select the gender\",\n                  choices=c(\"female\",\"male\")),\n      sliderInput(\"age\",\"please select the age\",\n                  min=1, max=100, value=40, step=10),\n      conditionalPanel(condition=\"input.gender=='female'\",\n                       textInput(\"racegroup\",\"please select the racegroup:\",'white'),\n                       textInput(\"caresource\",\"please select the care source:\")),\n      conditionalPanel(condition=\"input.gender=='male'\",\n                       textInput(\"racegroup\",\"please select the racegroup:\",'white'),\n                       textInput(\"caresource\",\"please select the care source:\",'clinic'))\n    ),\n    mainPanel(\n      plotOutput(\"myPlot\")\n    )\n  )\n  \n)",
+    "created" : 1462227748052.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3118446927",
+    "id" : "5FE950C8",
+    "lastKnownWriteTime" : 1462226611,
+    "last_content_update" : 1462226611,
+    "path" : "C:/Users/mahitha/Desktop/239/project/ckd/CKD-Test-master/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

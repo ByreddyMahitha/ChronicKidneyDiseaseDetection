@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\ninstall.packages(\"caret\")\ninstall.packages(\"caTools\")\ninstall.packages(\"ROCR\")\ninstall.packages(\"class\")\ninstall.packages(\"MASS\")\ninstall.packages(\"e1071\")\ninstall.packages(\"rpart\")\ninstall.packages(\"rpart.plot\")\ninstall.packages(\"rattle\")\ninstall.packages(\"randomForest\")\ninstall.packages(\"party\")\ninstall.packages(\"kernlab\")\ninstall.packages(\"neuralnet\")\ninstall.packages(\"randomForestSRC\")\n\n\n\n\nlibrary(caret)\nlibrary(caTools)\nlibrary(ROCR)\nlibrary(class)\nlibrary(MASS)\nlibrary(e1071)\nlibrary(rpart)\nlibrary(rpart.plot)\nlibrary(rattle)\nlibrary(randomForest)\nlibrary(party)\nlibrary(kernlab)\nlibrary(neuralnet)\nlibrary(randomForestSRC)\n\nModelData <- read.csv(\"CKD Screening Data for Model Building.csv\")\nTestData <- read.csv(\"CKD Screening Data for Testing.csv\")\n\nModelData$ID <- NULL\nTestData$ID <- NULL\n\nModelData$X <- NULL\nTestData$X <- NULL\n\nModelData<-ModelData[-5934,] #Bad row. VERY bad row\n\nModelData <- na.omit(ModelData)\nTestData <- na.omit(TestData)\n\nModelData$Racegrp <- droplevels(ModelData$Racegrp)\nModelData$CareSource <- droplevels(ModelData$CareSource)\n\nTestData$Racegrp <- droplevels(TestData$Racegrp)\nTestData$CareSource <- droplevels(TestData$CareSource)\n\nlevels(ModelData$Racegrp) <- levels(TestData$Racegrp)\nlevels(TestData$CareSource) <- levels(ModelData$CareSource)\n\n\n#Keep separate copy of datasets, start factorizing variables in new copies\nModelDataFactored <- ModelData\nTestDataFactored <- TestData\n\nsource(\"Model-Factorize.R\")\nsource(\"Test-Factorize.R\")\n\n#STEP 0: Random Forest of Survival - Erik\nsource(\"RFS.R\")\n\n#STEP 1: Random Forest - Erik\nsource(\"RandomForest.R\")\n\n#STEP 2: Logistic regression - Narek\nsource(\"LogRes.R\")\n\n#STEP 3: KNN - Karen\nsource(\"KNN.R\")\n\n#STEP 4: LDA - Karen\nsource(\"LDA.R\")\n\n#STEP 5: Decision Tree - Erik\nsource(\"DecistionTree.R\")\n\n#STEP 6: CTree - Erik\nsource(\"CTree.R\")\n\n#STEP 7: SVM - Narek\nsource(\"SVM.R\")\n\n#STEP 8: Naive Bayes - Karen\nsource(\"NaiveBayes.R\")\n\n#STEP 9: Neural Networks - Narek\nsource(\"NeuralNet.R\")",
+    "created" : 1462227772562.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "481305663",
+    "id" : "7A6751FB",
+    "lastKnownWriteTime" : 1462227821,
+    "last_content_update" : 1462227821132,
+    "path" : "C:/Users/mahitha/Desktop/239/project/ckd/CKD-Test-master/CKD-Test.R",
+    "project_path" : "CKD-Test.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

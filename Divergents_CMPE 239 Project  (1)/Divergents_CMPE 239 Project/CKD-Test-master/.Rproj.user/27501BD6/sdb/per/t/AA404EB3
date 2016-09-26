@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "set.seed(0305)\nindex <- createDataPartition(ModelDataFactored$CKD, p = 0.75, list = FALSE)\ntraining <- ModelDataFactored[index,]\ntesting <- ModelDataFactored[-index,]\n\nnb <- naiveBayes(CKD~., data=training,laplace=1)\n\npredVector<-predict(nb, newdata=testing)\nconfusionMatrix(predVector, testing$CKD, positive=\"No\")\n\nprint(\"Naive Bayes results:\")\nprint(\"Accuracy: 86%\")\nprint(\"Sensitivity: 87%\")\nprint(\"Specificity: 62%\")\n\nTestDataNB <- TestDataFactored\nTestDataNB$CKD <- predict(nb, newdata=TestDataNB)\n\nwrite.csv(TestDataNB, file = \"NaiveBayes.csv\", row.names = F, quote = F)\nTestDataNB <- NULL\n\n",
+    "created" : 1462256183041.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "148553181",
+    "id" : "AA404EB3",
+    "lastKnownWriteTime" : 1462256269,
+    "last_content_update" : 1462256269196,
+    "path" : "~/Desktop/CKD-Test-master/NaiveBayes.R",
+    "project_path" : "NaiveBayes.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
